@@ -38,10 +38,12 @@ const Frontpage = (props) => {
         añadirComida ? setAñadirComida(false) : setAñadirComida(true);
     }
 
-    function addFood(calorias) {
-        setCaloriasActuales(caloriasActuales + calorias);
-        setAñadirComida(false);
-    }
+    const onSubmit = (value) => {
+        const intValue = parseInt(value, 10);
+        // Update the value of the `foodCalories` state by adding the `value` passed from the child component
+        setCaloriasActuales(caloriasActuales + intValue);
+        añadirComida ? setAñadirComida(false) : setAñadirComida(true);
+    };
     
     
     useEffect(() => {
@@ -66,7 +68,7 @@ const Frontpage = (props) => {
                 <button id="add-food-button" onClick={handleAddFood}>Añadir Comida</button>
                 <button id="add-exercise-button">Añadir Ejercicio</button>
             </div>
-            {añadirComida ? <FoodPopUp /> : false}
+            {añadirComida ? <FoodPopUp onSubmit={onSubmit} /> : false}
         </div>
         
     );
